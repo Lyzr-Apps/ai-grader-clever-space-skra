@@ -1,0 +1,54 @@
+{
+  "agent_name": "Plagiarism Detection Agent",
+  "agent_id": "69a17994c9b0fb4e32c2e670",
+  "description": "Compares a student's extracted answers against other submissions and identifies similarity patterns, flags potential plagiarism with confidence scores and matched segments.",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "overall_plagiarism_score": "number",
+    "risk_level": "string",
+    "question_analysis": [
+      {
+        "question_number": "number",
+        "similarity_score": "number",
+        "flagged": "boolean",
+        "matched_submissions": [
+          {
+            "student_name": "string",
+            "similarity_percentage": "number",
+            "matched_segments": [
+              "string"
+            ],
+            "confidence": "number"
+          }
+        ]
+      }
+    ],
+    "summary": "string",
+    "recommendation": "string"
+  },
+  "example_response": {
+    "overall_plagiarism_score": 0,
+    "risk_level": "sample string",
+    "question_analysis": [
+      {
+        "question_number": 0,
+        "similarity_score": 0,
+        "flagged": false,
+        "matched_submissions": [
+          {
+            "student_name": "sample string",
+            "similarity_percentage": 0,
+            "matched_segments": [
+              "sample string"
+            ],
+            "confidence": 0
+          }
+        ]
+      }
+    ],
+    "summary": "sample string",
+    "recommendation": "sample string"
+  }
+}

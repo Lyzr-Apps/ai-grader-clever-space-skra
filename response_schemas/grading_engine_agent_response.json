@@ -1,0 +1,86 @@
+{
+  "agent_name": "Grading Engine Agent",
+  "agent_id": "69a1799371517abcd697bccf",
+  "description": "Evaluates student answers against model answers using rubric criteria (semantic similarity, keyword coverage, concept accuracy, completeness, structure). Returns structured JSON with marks, justification, missing points, strengths, and improvement suggestions per question.",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "grading_results": [
+      {
+        "question_number": "number",
+        "question_text": "string",
+        "marks_awarded": "number",
+        "max_marks": "number",
+        "percentage": "number",
+        "justification": "string",
+        "keyword_coverage": {
+          "matched_keywords": [
+            "string"
+          ],
+          "missing_keywords": [
+            "string"
+          ],
+          "coverage_percentage": "number"
+        },
+        "missing_points": [
+          "string"
+        ],
+        "strengths": [
+          "string"
+        ],
+        "improvement_suggestions": [
+          "string"
+        ],
+        "concept_accuracy": "string",
+        "completeness": "string",
+        "structure_quality": "string"
+      }
+    ],
+    "total_marks_awarded": "number",
+    "total_max_marks": "number",
+    "overall_percentage": "number",
+    "overall_grade": "string",
+    "overall_feedback": "string",
+    "performance_category": "string"
+  },
+  "example_response": {
+    "grading_results": [
+      {
+        "question_number": 0,
+        "question_text": "sample string",
+        "marks_awarded": 0,
+        "max_marks": 0,
+        "percentage": 0,
+        "justification": "sample string",
+        "keyword_coverage": {
+          "matched_keywords": [
+            "sample string"
+          ],
+          "missing_keywords": [
+            "sample string"
+          ],
+          "coverage_percentage": 0
+        },
+        "missing_points": [
+          "sample string"
+        ],
+        "strengths": [
+          "sample string"
+        ],
+        "improvement_suggestions": [
+          "sample string"
+        ],
+        "concept_accuracy": "sample string",
+        "completeness": "sample string",
+        "structure_quality": "sample string"
+      }
+    ],
+    "total_marks_awarded": 0,
+    "total_max_marks": 0,
+    "overall_percentage": 0,
+    "overall_grade": "sample string",
+    "overall_feedback": "sample string",
+    "performance_category": "sample string"
+  }
+}

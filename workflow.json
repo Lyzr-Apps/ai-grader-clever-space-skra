@@ -1,0 +1,42 @@
+{
+  "nodes": [
+    {
+      "id": "input_node",
+      "type": "Input",
+      "label": "Student Submission",
+      "nodeCategory": "input"
+    },
+    {
+      "id": "grading_agent",
+      "type": "Agent",
+      "label": "Grading Engine Agent",
+      "nodeCategory": "agent"
+    },
+    {
+      "id": "plagiarism_agent",
+      "type": "Agent",
+      "label": "Plagiarism Detection Agent",
+      "nodeCategory": "agent"
+    },
+    {
+      "id": "report_agent",
+      "type": "Agent",
+      "label": "Report Generator Agent",
+      "nodeCategory": "agent"
+    }
+  ],
+  "edges": [
+    {
+      "source": "input_node",
+      "target": "grading_agent"
+    },
+    {
+      "source": "grading_agent",
+      "target": "plagiarism_agent"
+    },
+    {
+      "source": "plagiarism_agent",
+      "target": "report_agent"
+    }
+  ]
+}

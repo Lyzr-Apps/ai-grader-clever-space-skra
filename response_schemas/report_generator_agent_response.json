@@ -1,0 +1,126 @@
+{
+  "agent_name": "Report Generator Agent",
+  "agent_id": "69a17994c630aea0386ccd09",
+  "description": "Compiles grading results, per-question feedback, overall scores, performance category, and AI confidence into a structured formal evaluation report suitable for PDF rendering.",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "report_title": "string",
+    "generated_at": "string",
+    "student_info": {
+      "name": "string",
+      "student_id": "string",
+      "course": "string",
+      "section": "string"
+    },
+    "assignment_info": {
+      "title": "string",
+      "subject": "string",
+      "date": "string",
+      "total_marks": "number"
+    },
+    "executive_summary": "string",
+    "overall_performance": {
+      "total_marks_awarded": "number",
+      "total_max_marks": "number",
+      "percentage": "number",
+      "grade": "string",
+      "performance_category": "string"
+    },
+    "question_breakdown": [
+      {
+        "question_number": "number",
+        "question_text": "string",
+        "marks_awarded": "number",
+        "max_marks": "number",
+        "percentage": "number",
+        "feedback": "string",
+        "strengths": [
+          "string"
+        ],
+        "improvements": [
+          "string"
+        ],
+        "keyword_coverage_percent": "number"
+      }
+    ],
+    "performance_analytics": {
+      "strongest_areas": [
+        "string"
+      ],
+      "weakest_areas": [
+        "string"
+      ],
+      "average_keyword_coverage": "number"
+    },
+    "improvement_roadmap": [
+      "string"
+    ],
+    "grade_justification": "string",
+    "integrity_section": "string"
+  },
+  "example_response": {
+    "report_title": "sample string",
+    "generated_at": "sample string",
+    "student_info": {
+      "name": "sample string",
+      "student_id": "sample string",
+      "course": "sample string",
+      "section": "sample string"
+    },
+    "assignment_info": {
+      "title": "sample string",
+      "subject": "sample string",
+      "date": "sample string",
+      "total_marks": 0
+    },
+    "executive_summary": "sample string",
+    "overall_performance": {
+      "total_marks_awarded": 0,
+      "total_max_marks": 0,
+      "percentage": 0,
+      "grade": "sample string",
+      "performance_category": "sample string"
+    },
+    "question_breakdown": [
+      {
+        "question_number": 0,
+        "question_text": "sample string",
+        "marks_awarded": 0,
+        "max_marks": 0,
+        "percentage": 0,
+        "feedback": "sample string",
+        "strengths": [
+          "sample string"
+        ],
+        "improvements": [
+          "sample string"
+        ],
+        "keyword_coverage_percent": 0
+      }
+    ],
+    "performance_analytics": {
+      "strongest_areas": [
+        "sample string"
+      ],
+      "weakest_areas": [
+        "sample string"
+      ],
+      "average_keyword_coverage": 0
+    },
+    "improvement_roadmap": [
+      "sample string"
+    ],
+    "grade_justification": "sample string",
+    "integrity_section": "sample string"
+  },
+  "has_module_outputs": true,
+  "module_outputs_example": {
+    "artifact_files": [
+      {
+        "file_url": "https://example.com/file.pdf"
+      }
+    ]
+  }
+}

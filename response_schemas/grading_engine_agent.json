@@ -1,0 +1,59 @@
+{
+  "agent_name": "Grading Engine Agent",
+  "agent_id": "69a1799371517abcd697bccf",
+  "agent_type": "json",
+  "accessor": "json",
+  "has_module_outputs": false,
+  "response_schema": {
+    "type": "json_schema",
+    "json_schema": {
+      "name": "GradingEngineResponse",
+      "strict": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "grading_results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "question_number": { "type": "number" },
+                "question_text": { "type": "string" },
+                "marks_awarded": { "type": "number" },
+                "max_marks": { "type": "number" },
+                "percentage": { "type": "number" },
+                "justification": { "type": "string" },
+                "keyword_coverage": {
+                  "type": "object",
+                  "properties": {
+                    "matched_keywords": { "type": "array", "items": { "type": "string" } },
+                    "missing_keywords": { "type": "array", "items": { "type": "string" } },
+                    "coverage_percentage": { "type": "number" }
+                  },
+                  "required": ["matched_keywords", "missing_keywords", "coverage_percentage"],
+                  "additionalProperties": false
+                },
+                "missing_points": { "type": "array", "items": { "type": "string" } },
+                "strengths": { "type": "array", "items": { "type": "string" } },
+                "improvement_suggestions": { "type": "array", "items": { "type": "string" } },
+                "concept_accuracy": { "type": "string" },
+                "completeness": { "type": "string" },
+                "structure_quality": { "type": "string" }
+              },
+              "required": ["question_number", "question_text", "marks_awarded", "max_marks", "percentage", "justification", "keyword_coverage", "missing_points", "strengths", "improvement_suggestions", "concept_accuracy", "completeness", "structure_quality"],
+              "additionalProperties": false
+            }
+          },
+          "total_marks_awarded": { "type": "number" },
+          "total_max_marks": { "type": "number" },
+          "overall_percentage": { "type": "number" },
+          "overall_grade": { "type": "string" },
+          "overall_feedback": { "type": "string" },
+          "performance_category": { "type": "string" }
+        },
+        "required": ["grading_results", "total_marks_awarded", "total_max_marks", "overall_percentage", "overall_grade", "overall_feedback", "performance_category"],
+        "additionalProperties": false
+      }
+    }
+  }
+}

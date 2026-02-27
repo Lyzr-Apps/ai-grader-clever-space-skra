@@ -1,0 +1,52 @@
+{
+  "agent_name": "Plagiarism Detection Agent",
+  "agent_id": "69a17994c9b0fb4e32c2e670",
+  "agent_type": "json",
+  "accessor": "json",
+  "has_module_outputs": false,
+  "response_schema": {
+    "type": "json_schema",
+    "json_schema": {
+      "name": "PlagiarismDetectionResponse",
+      "strict": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "overall_plagiarism_score": { "type": "number" },
+          "risk_level": { "type": "string" },
+          "question_analysis": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "question_number": { "type": "number" },
+                "similarity_score": { "type": "number" },
+                "flagged": { "type": "boolean" },
+                "matched_submissions": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "student_name": { "type": "string" },
+                      "similarity_percentage": { "type": "number" },
+                      "matched_segments": { "type": "array", "items": { "type": "string" } },
+                      "confidence": { "type": "number" }
+                    },
+                    "required": ["student_name", "similarity_percentage", "matched_segments", "confidence"],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": ["question_number", "similarity_score", "flagged", "matched_submissions"],
+              "additionalProperties": false
+            }
+          },
+          "summary": { "type": "string" },
+          "recommendation": { "type": "string" }
+        },
+        "required": ["overall_plagiarism_score", "risk_level", "question_analysis", "summary", "recommendation"],
+        "additionalProperties": false
+      }
+    }
+  }
+}

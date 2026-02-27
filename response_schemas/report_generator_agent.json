@@ -1,0 +1,90 @@
+{
+  "agent_name": "Report Generator Agent",
+  "agent_id": "69a17994c630aea0386ccd09",
+  "agent_type": "json",
+  "accessor": "json",
+  "has_module_outputs": true,
+  "response_schema": {
+    "type": "json_schema",
+    "json_schema": {
+      "name": "ReportGeneratorResponse",
+      "strict": true,
+      "schema": {
+        "type": "object",
+        "properties": {
+          "report_title": { "type": "string" },
+          "generated_at": { "type": "string" },
+          "student_info": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "student_id": { "type": "string" },
+              "course": { "type": "string" },
+              "section": { "type": "string" }
+            },
+            "required": ["name", "student_id", "course", "section"],
+            "additionalProperties": false
+          },
+          "assignment_info": {
+            "type": "object",
+            "properties": {
+              "title": { "type": "string" },
+              "subject": { "type": "string" },
+              "date": { "type": "string" },
+              "total_marks": { "type": "number" }
+            },
+            "required": ["title", "subject", "date", "total_marks"],
+            "additionalProperties": false
+          },
+          "executive_summary": { "type": "string" },
+          "overall_performance": {
+            "type": "object",
+            "properties": {
+              "total_marks_awarded": { "type": "number" },
+              "total_max_marks": { "type": "number" },
+              "percentage": { "type": "number" },
+              "grade": { "type": "string" },
+              "performance_category": { "type": "string" }
+            },
+            "required": ["total_marks_awarded", "total_max_marks", "percentage", "grade", "performance_category"],
+            "additionalProperties": false
+          },
+          "question_breakdown": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "question_number": { "type": "number" },
+                "question_text": { "type": "string" },
+                "marks_awarded": { "type": "number" },
+                "max_marks": { "type": "number" },
+                "percentage": { "type": "number" },
+                "feedback": { "type": "string" },
+                "strengths": { "type": "array", "items": { "type": "string" } },
+                "improvements": { "type": "array", "items": { "type": "string" } },
+                "keyword_coverage_percent": { "type": "number" }
+              },
+              "required": ["question_number", "question_text", "marks_awarded", "max_marks", "percentage", "feedback", "strengths", "improvements", "keyword_coverage_percent"],
+              "additionalProperties": false
+            }
+          },
+          "performance_analytics": {
+            "type": "object",
+            "properties": {
+              "strongest_areas": { "type": "array", "items": { "type": "string" } },
+              "weakest_areas": { "type": "array", "items": { "type": "string" } },
+              "average_keyword_coverage": { "type": "number" }
+            },
+            "required": ["strongest_areas", "weakest_areas", "average_keyword_coverage"],
+            "additionalProperties": false
+          },
+          "improvement_roadmap": { "type": "array", "items": { "type": "string" } },
+          "grade_justification": { "type": "string" },
+          "integrity_section": { "type": "string" }
+        },
+        "required": ["report_title", "generated_at", "student_info", "assignment_info", "executive_summary", "overall_performance", "question_breakdown", "performance_analytics", "improvement_roadmap", "grade_justification", "integrity_section"],
+        "additionalProperties": false
+      }
+    }
+  }
+}
