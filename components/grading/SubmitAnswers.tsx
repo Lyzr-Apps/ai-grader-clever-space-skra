@@ -8,10 +8,11 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { FiSend, FiLoader, FiAlertTriangle, FiCheck } from 'react-icons/fi';
+import { FiSend, FiLoader, FiAlertTriangle, FiCheck, FiUpload } from 'react-icons/fi';
 import { callAIAgent } from '@/lib/aiAgent';
 import type { Assignment, Submission, StudentInfo, GradingResponse } from './types';
 import { GRADING_AGENT_ID, parseAgentResponse, generateId } from './constants';
+import PdfUploader from './PdfUploader';
 
 interface SubmitAnswersProps {
   assignments: Assignment[];
@@ -27,6 +28,8 @@ export default function SubmitAnswers({ assignments, onSubmissionGraded, onActiv
   const [error, setError] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [lastSubmission, setLastSubmission] = useState<Submission | null>(null);
+  const [inputMode, setInputMode] = useState<'manual' | 'pdf'>('manual');
+  const [pdfApplied, setPdfApplied] = useState(false);
 
   const selectedAssignment = assignments.find((a) => a.id === selectedAssignmentId);
 
@@ -38,6 +41,13 @@ export default function SubmitAnswers({ assignments, onSubmissionGraded, onActiv
     }
     setSubmitted(false);
     setLastSubmission(null);
+    setError('');
+    setPdfApplied(false);
+  };
+
+  const handlePdfExtracted = (extractedAnswers: string[]) => {
+    setAnswers(extractedAnswers);
+    setPdfApplied(true);
     setError('');
   };
 
@@ -127,7 +137,7 @@ export default function SubmitAnswers({ assignments, onSubmissionGraded, onActiv
             <FiSend className="w-5 h-5 text-indigo-600" />
             Submit Answer Sheet
           </CardTitle>
-          <CardDescription>Select an assignment, fill in your answers, and submit for AI-powered grading</CardDescription>
+          <CardDescription>Select an assignment, type your answers or upload a PDF answer sheet, and submit for AI-powered grading</CardDescription>
         </CardHeader>
         <CardContent className="space-y-5">
           {/* Assignment Selection */}
@@ -174,6 +184,51 @@ export default function SubmitAnswers({ assignments, onSubmissionGraded, onActiv
                   Total: {selectedAssignment.questions.reduce((s, q) => s + q.maxMarks, 0)} marks
                 </Badge>
               </div>
+
+              {/* Input Mode Toggle */}
+              <div className="flex items-center gap-1 bg-slate-100 rounded-lg p-1 w-fit">
+                <button
+                  type="button"
+                  onClick={() => setInputMode('manual')}
+                  className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                    inputMode === 'manual'
+                      ? 'bg-white text-indigo-700 shadow-sm'
+                      : 'text-slate-500 hover:text-slate-700'
+                  }`}
+                  disabled={loading || submitted}
+                >
+                  Type Answers
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setInputMode('pdf')}
+                  className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors flex items-center gap-1.5 ${
+                    inputMode === 'pdf'
+                      ? 'bg-white text-indigo-700 shadow-sm'
+                      : 'text-slate-500 hover:text-slate-700'
+                  }`}
+                  disabled={loading || submitted}
+                >
+                  <FiUpload className="w-3.5 h-3.5" /> Upload PDF
+                </button>
+              </div>
+
+              {/* PDF Upload Section */}
+              {inputMode === 'pdf' && (
+                <PdfUploader
+                  questionCount={selectedAssignment.questions.length}
+                  questionTexts={selectedAssignment.questions.map((q) => q.questionText)}
+                  onExtracted={handlePdfExtracted}
+                  disabled={loading || submitted}
+                />
+              )}
+
+              {/* PDF Applied Info */}
+              {pdfApplied && inputMode === 'pdf' && (
+                <p className="text-xs text-indigo-600 bg-indigo-50 px-3 py-2 rounded-md">
+                  PDF answers have been applied to the fields below. Review and edit if needed before submitting.
+                </p>
+              )}
 
               {/* Questions */}
               <div className="space-y-4">
